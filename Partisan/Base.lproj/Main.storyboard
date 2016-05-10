@@ -239,7 +239,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="firstCell" rowHeight="50" id="rcO-mO-YUZ" customClass="CellCameraView" customModule="Partisan" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="secondCell" rowHeight="50" id="rcO-mO-YUZ" customClass="CellCameraView" customModule="Partisan" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="159" width="600" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rcO-mO-YUZ" id="Kwh-vD-rNZ">
