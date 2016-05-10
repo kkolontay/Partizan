@@ -62,9 +62,8 @@ class UserInfo: NSObject {
        }
     
     func dataForRequest() -> String {
-        let customerAllowedSet = NSCharacterSet(charactersInString: "=\"#%/<>?\\^`{|},:;@.").invertedSet
         
-        return String(format: "json={\"email\":\"%@\",\"password\":\"%@\",\"remember_me\":%@,\"client_key\":\"%@\"}", emailUser!, passwordUser!, (rememberUser?.description.uppercaseString)!, keyUser!).stringByAddingPercentEncodingWithAllowedCharacters(customerAllowedSet)!
+        return String(format: "json={\"email\":\"%@\",\"password\":\"%@\",\"remember_me\":%@,\"client_key\":\"%@\"}", emailUser!, passwordUser!, (rememberUser?.description.uppercaseString)!, keyUser!)
         
     }
    

@@ -199,11 +199,83 @@
                         <outlet property="passwordTextField" destination="Dtx-mE-WHv" id="bJO-ch-l79"/>
                         <outlet property="scrollView" destination="qe0-9z-m2K" id="TGA-3j-P6O"/>
                         <outlet property="switchRemembered" destination="Yaj-cI-m3N" id="fUd-VM-yJA"/>
+                        <segue destination="3Fy-zC-9kH" kind="show" identifier="cameraList" id="ib3-Pq-bO4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="348"/>
+            <point key="canvasLocation" x="156" y="283"/>
+        </scene>
+        <!--Partizan Cloud-->
+        <scene sceneID="hUG-6u-ZaX">
+            <objects>
+                <tableViewController id="qkB-iE-635" customClass="CameraTableView" customModule="Partisan" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="45" sectionFooterHeight="28" id="C4X-Lm-zP3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="firstCell" rowHeight="50" id="P2h-Sl-3Zz">
+                                <rect key="frame" x="0.0" y="109" width="600" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P2h-Sl-3Zz" id="6zA-on-AGx">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxy-cl-kOt">
+                                            <rect key="frame" x="18" y="8" width="46" height="30"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3TJ-3N-5zl">
+                                            <rect key="frame" x="507" y="11" width="46" height="30"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHx-WF-kXP">
+                                            <rect key="frame" x="80" y="14" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="firstCell" rowHeight="50" id="rcO-mO-YUZ" customClass="CellCameraView" customModule="Partisan" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="159" width="600" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rcO-mO-YUZ" id="Kwh-vD-rNZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="qkB-iE-635" id="UHP-SM-b5X"/>
+                            <outlet property="delegate" destination="qkB-iE-635" id="l7U-tK-qvV"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Partizan Cloud" id="b8W-kP-Px2"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WDe-dZ-BxB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1628" y="283"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EhF-zr-8YO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Fy-zC-9kH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lc5-Qu-Qqh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qkB-iE-635" kind="relationship" relationship="rootViewController" id="x76-h0-SLO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8MG-6Q-ih7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="816" y="283"/>
         </scene>
     </scenes>
     <resources>

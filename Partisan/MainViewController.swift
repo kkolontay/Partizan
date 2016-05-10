@@ -17,7 +17,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var switchRemembered: UISwitch!
     private var oldShow:Bool?
+   // private var authentificationResult: Dictionary<String, AnyObject>?
     private var user: UserInfo?
+    private var connected: NetworkConnection?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,12 +111,48 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         }
        // let jsonString: String?
         if user?.email != nil {
-        let connected = NetworkConnection()
+         connected = NetworkConnection()
+            connected!.delegate = self
             let stringRequest = user?.dataForRequest()
-         connected.fetchURl(Request.securityLogin.rawValue, stringRequest: stringRequest)
-       //  jsonString = connected.encodingURL(data)
+           connected!.fetchURl(Request.securityLogin.rawValue, stringRequest: stringRequest) 
+//               authentificationResult = connected.parseJSON(result)
+//            }
+//       //  jsonString = connected.encodingURL(data)
+//                    }
+    }
+    }
+          override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+            if segue.identifier == "cameraList" {
+               // connected?.fetchURl(<#T##typeURLRequest: String##String#>)
+                let destinationNavigationController =  segue.destinationViewController as! UINavigationController
+                let tableViewController = destinationNavigationController.topViewController
+            }
+    
+}
+}
+extension MainViewController: FetchResultUserRequest {
+    func checkedResults(result: Dictionary<String, AnyObject>) {
+            let variation = result["error_code"] as! Int
+            switch variation {
+            case 0:
+                let cameraItems = CameraItems()
+                connected?.delegate = cameraItems
+                connected?.fetchURl(Request.getUserDevices.rawValue, stringRequest: Request.emptyBody.rawValue)
+                performSegueWithIdentifier("cameraList", sender: self)
+            case 202:
+                WarningClass.warning(ResponseUserRequest.userNotActive202.description, viewController: self)
+            case 204:
+                WarningClass.warning(ResponseUserRequest.userDoesNotExist204.description, viewController: self)
+            case 205:
+                WarningClass.warning(ResponseUserRequest.userBadCredential205.description, viewController: self)
+            case 208:
+                WarningClass.warning(ResponseUserRequest.userUnknowError208.description, viewController: self)
+            case 209:
+                WarningClass.warning(ResponseUserRequest.userInvalidKey209.description, viewController: self)
+            default:
+                break
+                
         }
 
     }
 }
-
