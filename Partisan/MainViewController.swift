@@ -15,7 +15,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var buttonBlue: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var switchRemembered: UISwitch!
     private var oldShow:Bool?
+    private var user: UserInfo?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +90,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         dispatch_after(time, dispatch_get_main_queue(), {
        self.buttonGreen.setBackgroundImage(UIImage(named: "Button_green_unpressed"), forState: .Normal)
         })
+        
     }
     @IBAction func buttonBluePressed(sender: AnyObject) {
         buttonBlue.setBackgroundImage(UIImage(named: "Button_blue_pressed"), forState: .Normal)
@@ -96,6 +99,22 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         dispatch_after(time, dispatch_get_main_queue(), {
         self.buttonBlue.setBackgroundImage(UIImage(named: "Button_blue_unpressed"), forState: .Normal)
         })
+        user = UserInfo(viewControllerScreen: self)
+        if let email = passwordTextField.text {
+            user?.email = email
+        }
+        user?.remember = switchRemembered.on
+        if let password = emailTextField.text {
+            user?.password = password
+        }
+       // let jsonString: String?
+        if user?.email != nil {
+        let connected = NetworkConnection()
+            let stringRequest = user?.dataForRequest()
+         connected.fetchURl(Request.securityLogin.rawValue, stringRequest: stringRequest)
+       //  jsonString = connected.encodingURL(data)
+        }
+
     }
 }
 

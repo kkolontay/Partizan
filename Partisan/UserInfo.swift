@@ -21,9 +21,9 @@ class UserInfo: NSObject {
         self.viewController = viewControllerScreen
     }
     
-    var email: String {  set{
+    var email: String? {  set{
         
-        if  validEmail(newValue) {
+        if  newValue != nil && validEmail(newValue!) {
             emailUser = newValue
         }
         else {
@@ -31,7 +31,10 @@ class UserInfo: NSObject {
         }
         }
         get {
+            if emailUser != nil {
             return emailUser!
+            }
+            return nil
         }
     }
 
@@ -57,10 +60,12 @@ class UserInfo: NSObject {
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
             return emailTest.evaluateWithObject(emailString)
        }
+    
     func dataForRequest() -> String {
-        let request = String(format: "json={\"email\":\"%@\",\"password\":\"%@\",\"remember_me\":%@,\"client_key\":\"%@\"}", emailUser!, passwordUser!, (rememberUser?.description)!, keyUser!)
-        let requestUserValid = String(format: "%@%@%@", Request.hostName.rawValue, Request.securityLogin.rawValue, request.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)
-        return requestUserValid
+        let customerAllowedSet = NSCharacterSet(charactersInString: "=\"#%/<>?\\^`{|},:;@.").invertedSet
+        
+        return String(format: "json={\"email\":\"%@\",\"password\":\"%@\",\"remember_me\":%@,\"client_key\":\"%@\"}", emailUser!, passwordUser!, (rememberUser?.description.uppercaseString)!, keyUser!).stringByAddingPercentEncodingWithAllowedCharacters(customerAllowedSet)!
+        
     }
    
 }
